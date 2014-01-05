@@ -6,8 +6,8 @@
 
   <style type="text/css">
   body {
-    color: white;
-    background-color: black    }
+    color: black;
+    background-color: white;    }
   </style>
 
   
@@ -33,17 +33,13 @@ function button_1()
 {
     folderNameSt = "Teapot";
     imageNameSt = "Teapot00";
+    folderNameSt_a = "Mask";
+    imageNameSt_a = "Mask00";
     fileTypeSt = ".jpg";
     TotalImages = 36;
 }
         
-function button_2()
-{
-    folderNameSt = "fryface";
-    imageNameSt = "fryface";
-    fileTypeSt = ".png";
-    TotalImages = 45;
-}
+
         
 ///////////////////////////////////////////////////////////////////////////////////////
         
@@ -72,29 +68,14 @@ function GetImage(PictureNumber, folderName, imageName, fileType)
 
 
 </head>
-<body onload="GetImage(36, "Teapot", "Teapot", ".jpg")">
-     <header>  
-        <h1>Arcane 3D</h1>  
-        </header> 
-
-     <nav>  
-        <!-- Navigation -->  
-     </nav>  
-     <section id="intro">  
-         <!-- Introduction -->  
-     </section>  
-     <section>  
-<canvas id="myCanvas" width="558" height="418" style="border: 1px gray dashed">
-Requires Google Chrome, Firefox, Safari, Opera, and internet explorere version 9 Beta
-</canvas>
-     </section>  
-     <aside>  
-         <!-- Sidebar -->  
-     </aside>  
-     <footer>  
-         <!-- Footer -->  
-     </footer>  
-
+<body onload="GetImage(36, "Mask", "Mask", ".jpg"); GetImage(36, "Teapot", "Teapot", ".jpg");">
+  <section>  
+    <canvas id="myCanvas_a" width="658" height="518" style="background-color: #ff0000; border:1px; position: absolute; left: 0; top: 0; z-index: 0;">Requires Google Chrome, Firefox, Safari, Opera, and internet explorere version 9 Beta
+    </canvas>
+    <canvas id="myCanvas" width="558" height="518" style="background-color: #0000ff; border:1px; position: absolute; left: 0; top: 0; z-index: 1;">Requires Google Chrome, Firefox, Safari, Opera, and internet explorere version 9 Beta
+    </canvas>
+  </section>  
+  
 
 <script type="text/javascript">
 
@@ -105,12 +86,14 @@ if(window.addEventListener)
         
         folderNameSt = "Teapot";
         imageNameSt = "teapot00";
+        folderNameSt_a = "Mask";
+        imageNameSt_a = "mask00";
         fileTypeSt = ".jpg";
         TotalImages = 36;
 ///////////////////////////////////////////////////////////////////////////////////////
-        var canvas; 
-        var context;
-        var turnTable;
+        var canvas, canvas_a; 
+        var context, context_a;
+        var turnTable, turntable_a;
         var imageNumber = 1;
         var start_imageNumber = imageNumber ;
         var travelDistance = 0;
@@ -145,8 +128,95 @@ if(window.addEventListener)
             canvas.addEventListener('mousedown', evnt_canvas, false);
             canvas.addEventListener('mousemove', evnt_canvas, false);
             canvas.addEventListener('mouseup',   evnt_canvas, false);
+            
         }
         
+        function init_a () 
+        {
+            canvas_a = document.getElementById('myCanvas_a');
+            context_a = canvas_a.getContext('2d');
+            if (!context_a) 
+            {
+                alert('Error: failed to getContext alpha!');
+                return;
+            }
+            turnTable_a = new turnTable_app_a();
+            canvas_a.addEventListener('mousedown', evnt_canvas_a, false);
+            canvas_a.addEventListener('mousemove', evnt_canvas_a, false);
+            canvas_a.addEventListener('mouseup',   evnt_canvas_a, false);
+        }
+        
+             function turnTable_app_a() 
+        {
+            var turnTable_a = this;
+            this.started = false;
+
+            this.mousedown = function (ev) 
+            {
+                context_a.moveTo(ev._x, ev._y);
+                turnTable_a.started = true;
+                this.enabled = true;
+                startX = (ev._x);
+                start_imageNumber  = imageNumber ;
+            };
+            
+            //this.onkeydown = function(event) {
+
+            this.mousemove = function (ev) 
+            {
+                if (turnTable_a.started) 
+                {
+                    context_a.clearRect(0, 0, canvas_a.width, canvas_a.height);
+                    context_a.font         = 'italic 15px sans-serif';
+                    context_a.textBaseline = 'top';
+                    context_a.fillText("X:" + ev._x, 0, 0);
+
+                    //distance mouse moved (in Px)                    
+                    var changeDistance = Math.round((ev._x - startX));
+                    var rotation = (360 * changeDistance) / canvas_a.width ;
+                    var pcnt_change = (100 * changeDistance) / canvas_a.width ;
+
+                    context_a.fillText("Delta:"+changeDistance, 0, 20);
+                    context_a.fillText("Rotation:"+rotation , 0, 40);
+                    context_a.fillText("% Change:"+pcnt_change  , 0, 60);
+                    
+                    travelDistance = Math.round((TotalImages * pcnt_change) / 100);
+                    context_a.fillText("Image Delta:"+travelDistance  , 0, 80);
+
+                    //positionB = positionA + changeDistance;
+                    imageNumber  = start_imageNumber + travelDistance ;
+
+                    while (imageNumber >  TotalImages -1 )            
+                    {
+                        // gone past end of array
+                        // cycle ropund to begeining again
+                        imageNumber = imageNumber - TotalImages;
+                    }
+
+                    while (imageNumber < 0)            
+                    {
+                        // gone past begining of array
+                        // cycle round from end again
+                        imageNumber = imageNumber + TotalImages;
+                    }
+/////////////////////////////////////////////////////////////////////////////                    
+                   context_a.drawImage(GetImage(imageNumber, folderNameSt_a, imageNameSt_a, fileTypeSt), 0, 0);
+                   context_a.fillText("Img_a:" + imageNumber, 0, 100);
+                    
+                   
+                    
+                }
+            };
+            
+            this.mouseup = function (ev) 
+            {
+                if (turnTable_a.started) 
+                {
+                    turnTable_a.mousemove(ev);
+                    turnTable_a.started = false;                    
+                }
+            };
+        }
         
         function turnTable_app() 
         {
@@ -202,8 +272,10 @@ if(window.addEventListener)
                         imageNumber = imageNumber + TotalImages;
                     }
 /////////////////////////////////////////////////////////////////////////////                    
+                    
                     context.drawImage(GetImage(imageNumber, folderNameSt, imageNameSt, fileTypeSt), 0, 0);
                     context.fillText("Img:" + imageNumber, 0, 100);
+                    
                 }
             };
             
@@ -217,6 +289,8 @@ if(window.addEventListener)
             };
         }
 
+        
+   
 
         function evnt_canvas (ev) 
         {
@@ -236,6 +310,27 @@ if(window.addEventListener)
             if (func) 
             {
                 func(ev);
+            }
+        }
+        
+            function evnt_canvas_a (ev) 
+        {
+            if (ev.layerX || ev.layerX == 0) 
+            { // Firefox
+                ev._x = ev.layerX;
+                ev._y = ev.layerY;
+            } 
+            else if (ev.offsetX || ev.offsetX == 0) 
+            { // Opera
+                ev._x = ev.offsetX;
+                ev._y = ev.offsetY;
+            }
+
+
+            var func_a = turnTable_a[ev.type];
+            if (func_a) 
+            {
+                func_a(ev);
             }
         }
         
@@ -259,14 +354,47 @@ if(window.addEventListener)
 
 
 
+        
+        init_a();
         init();
+       
+ 
         canvas.addEventListener('click', function(e){
-        	alert("Salam");
+        	
         	var position = findPos(this);
 	    var x = e.pageX - position.x;
 	    var y = e.pageY - position.y;
 	    var coordinate = "x=" + x + ", y=" + y;
-	    var p_a = context.getImageData(x, y, 1, 1).data;
+	    
+            var p = context.getImageData(x, y, 1, 1).data;
+        	var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+                var p_a = context_a.getImageData(x, y, 1, 1).data;
+        	var hex_a = "#" + ("000000" + rgbToHex(p_a[0], p_a[1], p_a[2])).slice(-6);
+	    alert("(x ="+x + ", y = " + y + ")" +
+	          "\n\n HEX: " + hex +
+	          "\n r= " + p[0] +
+	          "\n g= " +  p[1] +
+	          "\n b= " +  p[2] +
+	          "\n alpha = " + p[3] +
+                  "\n\n MASK VALUES" +
+                   "\n r_a = " + p_a[0] +
+	          "\n g_a = " +  p_a[1] +
+	          "\n b_a = " +  p_a[2] 
+                  );
+            
+            
+	    
+            
+        	});
+        
+       /*    canvas.addEventListener('click', function(e){
+        	alert("Salam_a");
+        	var position = findPos(this);
+	    var x = e.pageX - position.x;
+	    var y = e.pageY - position.y;
+	    var coordinate = "alpha x=" + x + ", alpha y=" + y;
+	    
+            var p_a = context_a.getImageData(x, y, 1, 1).data;
         	var hex = "#" + ("000000" + rgbToHex(p_a[0], p_a[1], p_a[2])).slice(-6);
 	    alert("(x_a ="+x + ", y_a = " + y + ")" +
 	          "\n HEX_a: " + hex +
@@ -275,7 +403,7 @@ if(window.addEventListener)
 	          "\n b_a = " +  p_a[2] +
 	          "\n alpha = " + p_a[3]);
         	});
-        
+        */
 
     }, false); 
 }
@@ -284,17 +412,14 @@ if(window.addEventListener)
 <style type="text/css">
 .regular {
  font: bold 11px "Verdana", Arial, Helvetica, sans-serif;
- color: #000;
+ color: #0f0;
 }
 </style>
 <p>
-
 Click in the dotted window to utalise HTML5 Canvas Turntable 
-
-<img border="0" alt="test" src="Teapot/Teapot001.jpg" id="b1" width="50" height="50" onclick="button_1()" /></a>
-<img border="0" alt="test" src="fryface/fryface1.png" id="b2" width="50" height="50" onclick="button_2()" /></a>
-
-
-
+<img border="0" alt="test" src="Teapot/Teapot001.jpg" id="b1" width="50" height="50" onclick="button_1()" />
+<img border="0" alt="test" src="Mask/Mask001.jpg" id="b1" width="50" height="50" onclick="button_1()" />
 </p>
-</body></html>
+</body>
+
+</html>
