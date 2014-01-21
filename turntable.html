@@ -1,425 +1,423 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-<title>Arcane3D.co.uk
-</title>  
+  <head>
+    <title>Turntable 3D</title>
 
-  <style type="text/css">
-  body {
-    color: black;
-    background-color: white;    }
-  </style>
+    <style type="text/css">
+        body {
+            color: black;
+            background-color: white;
+        }
+    </style>
 
-  
-<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 
-<!-- 
+    <!-- 
 // (C) 2010 Stephen Bates [pharion3d@gmail.com]. All rights reserved.
 // Obtain permission before selling/redistributing in any medium.
 
 <!--[if IE]><script src="excanvas.js"></script><![endif]-->
 
+<link rel="stylesheet" href="//code.jquery.com/mobile/git/jquery.mobile-git.min.css">
+  <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="//code.jquery.com/mobile/git/jquery.mobile-git.min.js"></script>
 
-<script type="text/javascript">
-
-
-//var folderNameSt = "Pelvis";
-//var imageNameSt = "pelvis ";
-//var fileTypeSt = ".png";
-
-
-///////////////////////////////////////////////////////////////////////////////////////
-function button_1()
-{
-    folderNameSt = "Teapot";
-    imageNameSt = "Teapot00";
-    folderNameSt_a = "Mask";
-    imageNameSt_a = "Mask00";
-    fileTypeSt = ".jpg";
-    TotalImages = 36;
-}
-        
-
-        
-///////////////////////////////////////////////////////////////////////////////////////
-        
-function GetImage(PictureNumber, folderName, imageName, fileType) 
-{        
-    loadedImages = false;
-    ImageArray = new Array();
-    for (i = 0; i<TotalImages; i++)
-    {
-        ImageArray[i] = new Image();
-        ImageArray[i].onLoad = function(){};//context.fillText("Loaded Image: " + i, 100, 0)
-        ImageArray[i].src = folderName + "/" + imageName+(i + 1) + fileType;
-
-        if (ImageArray[TotalImages -1])
-        {
-            loadedImages = true;
-        }
-    }
-    return ImageArray[PictureNumber];
-
-}
-        
-        
-
-</script>
-
-
-</head>
-<body onload="GetImage(36, "Mask", "Mask", ".jpg"); GetImage(36, "Teapot", "Teapot", ".jpg");">
-  <section>  
-    <canvas id="myCanvas_a" width="658" height="518" style="background-color: #ff0000; border:1px; position: absolute; left: 0; top: 0; z-index: 0;">Requires Google Chrome, Firefox, Safari, Opera, and internet explorere version 9 Beta
-    </canvas>
-    <canvas id="myCanvas" width="558" height="518" style="background-color: #0000ff; border:1px; position: absolute; left: 0; top: 0; z-index: 1;">Requires Google Chrome, Firefox, Safari, Opera, and internet explorere version 9 Beta
-    </canvas>
-  </section>  
-  
-
-<script type="text/javascript">
-
-if(window.addEventListener) 
-{
-    window.addEventListener('load', function () 
-    {
-        
+    <script type="text/javascript">
         folderNameSt = "Teapot";
-        imageNameSt = "teapot00";
+        imageNameSt = "Teapot00";
         folderNameSt_a = "Mask";
-        imageNameSt_a = "mask00";
+        imageNameSt_a = "Mask00";
         fileTypeSt = ".jpg";
         TotalImages = 36;
-///////////////////////////////////////////////////////////////////////////////////////
-        var canvas, canvas_a; 
-        var context, context_a;
-        var turnTable, turntable_a;
-        var imageNumber = 1;
-        var start_imageNumber = imageNumber ;
-        var travelDistance = 0;
-        var startX = 0;
-        var positionA = 0;
         
+        function GetImage(PictureNumber, folderName, imageName, fileType) {
+            loadedImages = false;
+            ImageArray = new Array();
+            for (i = 0; i < TotalImages; i++) {
+                ImageArray[i] = new Image();
+                ImageArray[i].onLoad = function () {}; //context.fillText("Loaded Image: " + i, 100, 0)
+                ImageArray[i].src = folderName + "/" + imageName + (i + 1) + fileType;
 
-        
-
-
-///////////////////////////////////////////////////////////////////////////////////////        
-        
-
-        
-///////////////////////////////////////////////////////////////////////////////////////        
-        
-
-
-
-
-
-        function init () 
-        {
-            canvas = document.getElementById('myCanvas');
-            context = canvas.getContext('2d');
-            if (!context) 
-            {
-                alert('Error: failed to getContext!');
-                return;
+                if (ImageArray[TotalImages - 1]) {
+                    loadedImages = true;
+                }
             }
-            turnTable = new turnTable_app();
-            canvas.addEventListener('mousedown', evnt_canvas, false);
-            canvas.addEventListener('mousemove', evnt_canvas, false);
-            canvas.addEventListener('mouseup',   evnt_canvas, false);
-            
+            return ImageArray[PictureNumber];
         }
-        
-        function init_a () 
-        {
-            canvas_a = document.getElementById('myCanvas_a');
-            context_a = canvas_a.getContext('2d');
-            if (!context_a) 
-            {
-                alert('Error: failed to getContext alpha!');
-                return;
-            }
-            turnTable_a = new turnTable_app_a();
-            canvas_a.addEventListener('mousedown', evnt_canvas_a, false);
-            canvas_a.addEventListener('mousemove', evnt_canvas_a, false);
-            canvas_a.addEventListener('mouseup',   evnt_canvas_a, false);
-        }
-        
-             function turnTable_app_a() 
-        {
-            var turnTable_a = this;
-            this.started = false;
+    </script>
+</head>
 
-            this.mousedown = function (ev) 
-            {
-                context_a.moveTo(ev._x, ev._y);
-                turnTable_a.started = true;
-                this.enabled = true;
-                startX = (ev._x);
-                start_imageNumber  = imageNumber ;
-            };
-            
-            //this.onkeydown = function(event) {
 
-            this.mousemove = function (ev) 
-            {
-                if (turnTable_a.started) 
-                {
-                    context_a.clearRect(0, 0, canvas_a.width, canvas_a.height);
-                    context_a.font         = 'italic 15px sans-serif';
-                    context_a.textBaseline = 'top';
-                    context_a.fillText("X:" + ev._x, 0, 0);
+<body onload="GetImage(36, " Mask ", "Mask ", ".jpg "); GetImage(36, "Teapot ", "Teapot ", ".jpg ");">
+    <section>
+        <canvas id="myCanvas_a" width="640" height="480" style="background-color: #ff0000; border:1px; position: absolute; left: 0; top: 0; z-index: 0;">
+          Requires Google Chrome, Firefox, Safari, Opera, and internet explorere version 9 Beta
+        </canvas>
+        <canvas id="myCanvas" width="640" height="480" style="background-color: #0000ff; border:1px; position: absolute; left: 0; top: 0; z-index: 1;">Requires Google Chrome, Firefox, Safari, Opera, and internet explorere version 9 Beta
+        </canvas>
+    </section>
 
-                    //distance mouse moved (in Px)                    
-                    var changeDistance = Math.round((ev._x - startX));
-                    var rotation = (360 * changeDistance) / canvas_a.width ;
-                    var pcnt_change = (100 * changeDistance) / canvas_a.width ;
-
-                    context_a.fillText("Delta:"+changeDistance, 0, 20);
-                    context_a.fillText("Rotation:"+rotation , 0, 40);
-                    context_a.fillText("% Change:"+pcnt_change  , 0, 60);
-                    
-                    travelDistance = Math.round((TotalImages * pcnt_change) / 100);
-                    context_a.fillText("Image Delta:"+travelDistance  , 0, 80);
-
-                    //positionB = positionA + changeDistance;
-                    imageNumber  = start_imageNumber + travelDistance ;
-
-                    while (imageNumber >  TotalImages -1 )            
-                    {
-                        // gone past end of array
-                        // cycle ropund to begeining again
-                        imageNumber = imageNumber - TotalImages;
-                    }
-
-                    while (imageNumber < 0)            
-                    {
-                        // gone past begining of array
-                        // cycle round from end again
-                        imageNumber = imageNumber + TotalImages;
-                    }
-/////////////////////////////////////////////////////////////////////////////                    
-                   context_a.drawImage(GetImage(imageNumber, folderNameSt_a, imageNameSt_a, fileTypeSt), 0, 0);
-                   context_a.fillText("Img_a:" + imageNumber, 0, 100);
-                    
-                   
-                    
-                }
-            };
-            
-            this.mouseup = function (ev) 
-            {
-                if (turnTable_a.started) 
-                {
-                    turnTable_a.mousemove(ev);
-                    turnTable_a.started = false;                    
-                }
-            };
-        }
-        
-        function turnTable_app() 
-        {
-            var turnTable = this;
-            this.started = false;
-
-            this.mousedown = function (ev) 
-            {
-                context.moveTo(ev._x, ev._y);
-                turnTable.started = true;
-                this.enabled = true;
-                startX = (ev._x);
-                start_imageNumber  = imageNumber ;
-            };
-            
-            //this.onkeydown = function(event) {
-
-            this.mousemove = function (ev) 
-            {
-                if (turnTable.started) 
-                {
-                    context.clearRect(0, 0, canvas.width, canvas.height);
-                    context.font         = 'italic 15px sans-serif';
-                    context.textBaseline = 'top';
-                    context.fillText("X:" + ev._x, 0, 0);
-
-                    //distance mouse moved (in Px)                    
-                    var changeDistance = Math.round((ev._x - startX));
-                    var rotation = (360 * changeDistance) / canvas.width ;
-                    var pcnt_change = (100 * changeDistance) / canvas.width ;
-
-                    context.fillText("Delta:"+changeDistance, 0, 20);
-                    context.fillText("Rotation:"+rotation , 0, 40);
-                    context.fillText("% Change:"+pcnt_change  , 0, 60);
-                    
-                    travelDistance = Math.round((TotalImages * pcnt_change) / 100);
-                    context.fillText("Image Delta:"+travelDistance  , 0, 80);
-
-                    //positionB = positionA + changeDistance;
-                    imageNumber  = start_imageNumber + travelDistance ;
-
-                    while (imageNumber >  TotalImages -1 )            
-                    {
-                        // gone past end of array
-                        // cycle ropund to begeining again
-                        imageNumber = imageNumber - TotalImages;
-                    }
-
-                    while (imageNumber < 0)            
-                    {
-                        // gone past begining of array
-                        // cycle round from end again
-                        imageNumber = imageNumber + TotalImages;
-                    }
-/////////////////////////////////////////////////////////////////////////////                    
-                    
-                    context.drawImage(GetImage(imageNumber, folderNameSt, imageNameSt, fileTypeSt), 0, 0);
-                    context.fillText("Img:" + imageNumber, 0, 100);
-                    
-                }
-            };
-            
-            this.mouseup = function (ev) 
-            {
-                if (turnTable.started) 
-                {
-                    turnTable.mousemove(ev);
-                    turnTable.started = false;                    
-                }
-            };
-        }
-
-        
+    
    
 
-        function evnt_canvas (ev) 
-        {
-            if (ev.layerX || ev.layerX == 0) 
-            { // Firefox
-                ev._x = ev.layerX;
-                ev._y = ev.layerY;
-            } 
-            else if (ev.offsetX || ev.offsetX == 0) 
-            { // Opera
-                ev._x = ev.offsetX;
-                ev._y = ev.offsetY;
-            }
 
 
-            var func = turnTable[ev.type];
-            if (func) 
-            {
-                func(ev);
-            }
-        }
-        
-            function evnt_canvas_a (ev) 
-        {
-            if (ev.layerX || ev.layerX == 0) 
-            { // Firefox
-                ev._x = ev.layerX;
-                ev._y = ev.layerY;
-            } 
-            else if (ev.offsetX || ev.offsetX == 0) 
-            { // Opera
-                ev._x = ev.offsetX;
-                ev._y = ev.offsetY;
-            }
+    <script type="text/javascript">
+       var canvas, canvas_a;
+                var context, context_a;
+                var turnTable, turntable_a;
+                var imageNumber = 1;
+                var start_imageNumber = imageNumber;
+                var travelDistance = 0;
+                var startX = 0;
+                var positionA = 0;
+       // if (window.addEventListener) {
+          
+            window.addEventListener('load', function () {
+
+                folderNameSt = "Teapot";
+                imageNameSt = "teapot00";
+                folderNameSt_a = "Mask";
+                imageNameSt_a = "mask00";
+                fileTypeSt = ".jpg";
+                TotalImages = 36;
+               
+                function init() {
+                    canvas = document.getElementById('myCanvas');
+                    context = canvas.getContext('2d');
+                    if (!context) {
+                        alert('Error: failed to getContext!');
+                        return;
+                    }
+                    turnTable = new turnTable_app();
+                    canvas.addEventListener('mousedown', evnt_canvas, false);
+                    canvas.addEventListener('mousemove', evnt_canvas, false);
+                    canvas.addEventListener('mouseup', evnt_canvas, false);
+                }
+
+                function init_a() {
+                    canvas_a = document.getElementById('myCanvas_a');
+                    context_a = canvas_a.getContext('2d');
+                    if (!context_a) {
+                        alert('Error: failed to getContext alpha!');
+                        return;
+                    }
+                    turnTable_a = new turnTable_app_a();
+                    canvas_a.addEventListener('mousedown', evnt_canvas_a, false);
+                    canvas_a.addEventListener('mousemove', evnt_canvas_a, false);
+                    canvas_a.addEventListener('mouseup', evnt_canvas_a, false);
+                }
+
+                function turnTable_app_a() {
+                    this.mousemove = function (ev) {
+                    };
+                }
+
+                function turnTable_app() {
+                    var turnTable = this;
+                    this.started = false;
+
+                    this.mousedown = function (ev) {
+                        context.moveTo(ev._x, ev._y);
+                        turnTable.started = true;
+                        context_a.moveTo(ev._x, ev._y);
+                        turnTable_a.started = true;
+                        this.enabled = true;
+                        startX = (ev._x);
+                        start_imageNumber = imageNumber;
+                       // alert("real mouse down = "+ startX + "ev._x "+ev._x +"ev._y" +ev._y);
+                    };
+
+                    //this.onkeydown = function(event) {
+
+                    this.mousemove = function (ev) {
+                        if (turnTable.started) {
+                            context.clearRect(0, 0, canvas.width, canvas.height);
+                            context.font = 'italic 15px sans-serif';
+                            context.textBaseline = 'top';
+                            context.fillText("X:" + ev._x, 0, 0);
+
+                            //distance mouse moved (in Px)                    
+                            var changeDistance = Math.round((ev._x - startX));
+                            var rotation = (360 * changeDistance) / canvas.width;
+                            var pcnt_change = (100 * changeDistance) / canvas.width;
+
+                            context.fillText("Delta:" + changeDistance, 0, 20);
+                            context.fillText("Rotation:" + rotation, 0, 40);
+                            context.fillText("% Change:" + pcnt_change, 0, 60);
+
+                            travelDistance = Math.round((TotalImages * pcnt_change) / 100);
+                            context.fillText("Image Delta:" + travelDistance, 0, 80);
+
+                            //positionB = positionA + changeDistance;
+                            imageNumber = start_imageNumber + travelDistance;
+
+                            while (imageNumber > TotalImages - 1) {
+                                // gone past end of array
+                                // cycle ropund to begeining again
+                                imageNumber = imageNumber - TotalImages;
+                            }
+
+                            while (imageNumber < 0) {
+                                // gone past begining of array
+                                // cycle round from end again
+                                imageNumber = imageNumber + TotalImages;
+                            }
+
+                            context.drawImage(GetImage(imageNumber, folderNameSt, imageNameSt, fileTypeSt), 0, 0);
+                            context.fillText("Img:" + imageNumber, 0, 100);
+
+                        }
 
 
-            var func_a = turnTable_a[ev.type];
-            if (func_a) 
-            {
-                func_a(ev);
-            }
-        }
-        
-        function findPos(obj){
-		    var current_left = 0, current_top = 0;
-		    if (obj.offsetParent){
-		        do{
-		            current_left += obj.offsetLeft;
-		            current_top += obj.offsetTop;
-		        }while(obj == obj.offsetParent);
-		        return {x: current_left, y: current_top};
-		    }
-		    return undefined;
-	    }
-	
-	    function rgbToHex(r, g, b){
-	    if (r > 255 || g > 255 || b > 255)
-	        throw "Invalid color component";
-	    return ((r << 16) | (g << 8) | b).toString(16);
-	    };
+                        if (turnTable_a.started) {
+                            context_a.clearRect(0, 0, canvas_a.width, canvas_a.height);
+                            context_a.font = 'italic 15px sans-serif';
+                            context_a.textBaseline = 'top';
+                            context_a.fillText("X:" + ev._x, 0, 0);
+
+                            //distance mouse moved (in Px)                    
+                            var changeDistance = Math.round((ev._x - startX));
+                            var rotation = (360 * changeDistance) / canvas_a.width;
+                            var pcnt_change = (100 * changeDistance) / canvas_a.width;
+
+                            context_a.fillText("Delta:" + changeDistance, 0, 20);
+                            context_a.fillText("Rotation:" + rotation, 0, 40);
+                            context_a.fillText("% Change:" + pcnt_change, 0, 60);
+
+                            travelDistance = Math.round((TotalImages * pcnt_change) / 100);
+                            context_a.fillText("Image Delta:" + travelDistance, 0, 80);
+
+                            //positionB = positionA + changeDistance;
+                            imageNumber = start_imageNumber + travelDistance;
+
+                            while (imageNumber > TotalImages - 1) {
+                                // gone past end of array
+                                // cycle ropund to begeining again
+                                imageNumber = imageNumber - TotalImages;
+                            }
+
+                            while (imageNumber < 0) {
+                                // gone past begining of array
+                                // cycle round from end again
+                                imageNumber = imageNumber + TotalImages;
+                            }
+
+                            context_a.drawImage(GetImage(imageNumber, folderNameSt_a, imageNameSt_a, fileTypeSt), 0, 0);
+                            context_a.fillText("Img_a:" + imageNumber, 0, 100);
+                        }
+                    };
+
+                    this.mouseup = function (ev) {
+                        if (turnTable.started) {
+                            turnTable.mousemove(ev);
+                            turnTable.started = false;
+                            turnTable_a.mousemove(ev);
+                            turnTable_a.started = false;
+                        }
+                    };
+                }
 
 
 
-        
-        init_a();
-        init();
+
+                function evnt_canvas(ev) {
+                    if (ev.layerX || ev.layerX == 0) { // Firefox
+                        ev._x = ev.layerX;
+                        ev._y = ev.layerY;
+                    } else if (ev.offsetX || ev.offsetX == 0) { // Opera
+                        ev._x = ev.offsetX;
+                        ev._y = ev.offsetY;
+                    }
+
+
+                    var func = turnTable[ev.type];
+                    if (func) {
+                        func(ev);
+                    }
+                }
+
+                function evnt_canvas_a(ev) {
+                    if (ev.layerX || ev.layerX == 0) { // Firefox
+                        ev._x = ev.layerX;
+                        ev._y = ev.layerY;
+                    } else if (ev.offsetX || ev.offsetX == 0) { // Opera
+                        ev._x = ev.offsetX;
+                        ev._y = ev.offsetY;
+                    }
+
+
+                    var func_a = turnTable_a[ev.type];
+                    if (func_a) {
+                        func_a(ev);
+                    }
+                }
+
+                function findPos(obj) {
+                    var current_left = 0,
+                        current_top = 0;
+                    if (obj.offsetParent) {
+                        do {
+                            current_left += obj.offsetLeft;
+                            current_top += obj.offsetTop;
+                        } while (obj == obj.offsetParent);
+                        return {
+                            x: current_left,
+                            y: current_top
+                        };
+                    }
+                    return undefined;
+                }
+
+                function rgbToHex(r, g, b) {
+                    if (r > 255 || g > 255 || b > 255)
+                        throw "Invalid color component";
+                    return ((r << 16) | (g << 8) | b).toString(16);
+                };
+
+                init_a();
+                init();
+                canvas.addEventListener('click', function (e) {
+
+                    var position = findPos(this);
+                    var x = e.pageX - position.x;
+                    var y = e.pageY - position.y;
+                    var coordinate = "x=" + x + ", y=" + y;
+
+                    var p = context.getImageData(x, y, 1, 1).data;
+                    var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+                    var p_a = context_a.getImageData(x, y, 1, 1).data;
+                    var hex_a = "#" + ("000000" + rgbToHex(p_a[0], p_a[1], p_a[2])).slice(-6);
+                    alert("(x =" + x + ", y = " + y + ")" + "\n\n HEX: " + hex +"\n r= " + p[0] + "\n g= " + p[1] + "\n b= " + p[2] +"\n alpha = " + p[3] +"\n\n MASK VALUES" +"\n r_a = " + p_a[0] +"\n g_a = " + p_a[1] +"\n b_a = " + p_a[2]);
+                });
+              }, false);
+       // }
        
- 
-        canvas.addEventListener('click', function(e){
-        	
-        	var position = findPos(this);
-	    var x = e.pageX - position.x;
-	    var y = e.pageY - position.y;
-	    var coordinate = "x=" + x + ", y=" + y;
-	    
-            var p = context.getImageData(x, y, 1, 1).data;
-        	var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
-                var p_a = context_a.getImageData(x, y, 1, 1).data;
-        	var hex_a = "#" + ("000000" + rgbToHex(p_a[0], p_a[1], p_a[2])).slice(-6);
-	    alert("(x ="+x + ", y = " + y + ")" +
-	          "\n\n HEX: " + hex +
-	          "\n r= " + p[0] +
-	          "\n g= " +  p[1] +
-	          "\n b= " +  p[2] +
-	          "\n alpha = " + p[3] +
-                  "\n\n MASK VALUES" +
-                   "\n r_a = " + p_a[0] +
-	          "\n g_a = " +  p_a[1] +
-	          "\n b_a = " +  p_a[2] 
-                  );
-            
-            
-	    
-            
-        	});
-        
-       /*    canvas.addEventListener('click', function(e){
-        	alert("Salam_a");
-        	var position = findPos(this);
-	    var x = e.pageX - position.x;
-	    var y = e.pageY - position.y;
-	    var coordinate = "alpha x=" + x + ", alpha y=" + y;
-	    
-            var p_a = context_a.getImageData(x, y, 1, 1).data;
-        	var hex = "#" + ("000000" + rgbToHex(p_a[0], p_a[1], p_a[2])).slice(-6);
-	    alert("(x_a ="+x + ", y_a = " + y + ")" +
-	          "\n HEX_a: " + hex +
-	          "\n r_a = " + p_a[0] +
-	          "\n g_a = " +  p_a[1] +
-	          "\n b_a = " +  p_a[2] +
-	          "\n alpha = " + p_a[3]);
-        	});
-        */
+       
 
-    }, false); 
-}
+$(function(){
+  var mouseX_down = 0, mouseY_down = 0;
+  var mouseX_up = 0, mouseY_up = 0;
+var mouseX_move = 0, mouseY_move = 0;
+  
+  $("#myCanvas").on( "vmousemove", vmousemoveHandler );
+  $("#myCanvas").on( "vmouseup", vmouseupHandler );
+   $("#myCanvas").on( "vmousedown", vmousedownHandler );
+   
+   function vmousemoveHandler( ev ){
+    mouseX_move = ev.pageX, mouseY_move = ev.pageY;
+    
+    if (turnTable.started) {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+     context.font = 'italic 15px sans-serif';
+     context.textBaseline = 'top';
+     context.fillText("X:" + ev.pageX, 0, 0);
 
-</script>
-<style type="text/css">
-.regular {
- font: bold 11px "Verdana", Arial, Helvetica, sans-serif;
- color: #0f0;
-}
-</style>
-<p>
-Click in the dotted window to utalise HTML5 Canvas Turntable 
-<img border="0" alt="test" src="Teapot/Teapot001.jpg" id="b1" width="50" height="50" onclick="button_1()" />
-<img border="0" alt="test" src="Mask/Mask001.jpg" id="b1" width="50" height="50" onclick="button_1()" />
-</p>
+     //distance mouse moved (in Px)                    
+     var changeDistance = Math.round((ev.pageX - startX));
+     var rotation = (360 * changeDistance) / canvas.width;
+     var pcnt_change = (100 * changeDistance) / canvas.width;
+
+    context.fillText("Delta:" + changeDistance, 0, 20);
+     context.fillText("Rotation:" + rotation, 0, 40);
+     context.fillText("% Change:" + pcnt_change, 0, 60);
+
+     travelDistance = Math.round((TotalImages * pcnt_change) / 100);
+     context.fillText("Image Delta:" + travelDistance, 0, 80);
+
+     //positionB = positionA + changeDistance;
+     imageNumber = start_imageNumber + travelDistance;
+
+     while (imageNumber > TotalImages - 1) {
+     // gone past end of array
+     // cycle ropund to begeining again
+     imageNumber = imageNumber - TotalImages;
+     }
+
+     while (imageNumber < 0) {
+     // gone past begining of array
+     // cycle round from end again
+     imageNumber = imageNumber + TotalImages;
+     }
+
+     context.drawImage(GetImage(imageNumber, folderNameSt, imageNameSt, fileTypeSt), 0, 0);
+     context.fillText("Img:" + imageNumber, 0, 100);
+     
+   }
+//alert("VMOUSE MOVE \nX_diff = " + (mouseX_down - mouseX_up) + " Y_diff = " + (mouseY_down - mouseY_up) );
+
+   /*  if (turnTable_a.started) {
+     context_a.clearRect(0, 0, canvas_a.width, canvas_a.height);
+     context_a.font = 'italic 15px sans-serif';
+     context_a.textBaseline = 'top';
+     context_a.fillText("X:" + ev._x, 0, 0);
+
+     //distance mouse moved (in Px)                    
+     var changeDistance = Math.round((ev._x - startX));
+     var rotation = (360 * changeDistance) / canvas_a.width;
+     var pcnt_change = (100 * changeDistance) / canvas_a.width;
+
+     context_a.fillText("Delta:" + changeDistance, 0, 20);
+     context_a.fillText("Rotation:" + rotation, 0, 40);
+     context_a.fillText("% Change:" + pcnt_change, 0, 60);
+
+     travelDistance = Math.round((TotalImages * pcnt_change) / 100);
+     context_a.fillText("Image Delta:" + travelDistance, 0, 80);
+
+     //positionB = positionA + changeDistance;
+     imageNumber = start_imageNumber + travelDistance;
+
+     while (imageNumber > TotalImages - 1) {
+     // gone past end of array
+     // cycle ropund to begeining again
+     imageNumber = imageNumber - TotalImages;
+     }
+
+     while (imageNumber < 0) {
+     // gone past begining of array
+     // cycle round from end again
+     imageNumber = imageNumber + TotalImages;
+     }
+
+     context_a.drawImage(GetImage(imageNumber, folderNameSt_a, imageNameSt_a, fileTypeSt), 0, 0);
+     context_a.fillText("Img_a:" + imageNumber, 0, 100);
+     }*/
+    
+  }
+  
+  function vmouseupHandler( event ){
+    mouseX_up = event.pageX;
+    mouseY_up = event.pageY;
+     
+    if (turnTable.started) {
+     turnTable.vmousemove(event);
+     turnTable.started = false;
+     turnTable_a.vmousemove(event);
+     turnTable_a.started = false;
+    }
+     
+  }
+  
+  function vmousedownHandler( event ){
+    mouseX_down = event.pageX;
+     mouseY_down = event.pageY;
+     
+   context.moveTo(mouseX_down, mouseY_down);
+    turnTable.started = true;
+     context_a.moveTo(mouseX_down, mouseY_down);
+     turnTable_a.started = true;
+     this.enabled = true;
+    
+     startX = (mouseX_down);
+     start_imageNumber = imageNumber;
+    // alert("Virtual Mouse Down : startX = "+ startX + " mouseX_down = "+mouseX_down +" mouseY_down = " +mouseY_down);
+   
+    
+  }  
+  
+});
+</script> 
+
 </body>
 
 </html>
