@@ -23,20 +23,25 @@
   <script src="//code.jquery.com/mobile/git/jquery.mobile-git.min.js"></script>
 
     <script type="text/javascript">
-        folderNameSt = "Teapot";
-        imageNameSt = "Teapot00";
+        folderNameSt = "Brain";
+        imageNameSt = "Brain00";
         folderNameSt_a = "Mask";
         imageNameSt_a = "Mask00";
         fileTypeSt = ".jpg";
         TotalImages = 36;
-        
+        var digit = "";
         function GetImage(PictureNumber, folderName, imageName, fileType) {
             loadedImages = false;
             ImageArray = new Array();
             for (i = 0; i < TotalImages; i++) {
                 ImageArray[i] = new Image();
                 ImageArray[i].onLoad = function () {}; //context.fillText("Loaded Image: " + i, 100, 0)
-                ImageArray[i].src = folderName + "/" + imageName + (i + 1) + fileType;
+                if(i<10)
+                digit = "0";
+                else
+                digit = "";
+                ImageArray[i].src = folderName + "/" + imageName + digit+(i + 1) + fileType;
+
 
                 if (ImageArray[TotalImages - 1]) {
                     loadedImages = true;
@@ -48,17 +53,19 @@
 </head>
 
 
-<body onload="GetImage(36, " Mask ", "Mask ", ".jpg "); GetImage(36, "Teapot ", "Teapot ", ".jpg ");">
+<body onload="GetImage(36, " Mask ", "Mask ", ".jpg "); GetImage(36, "Brain ", "Brain ", ".jpg ");">
     <section>
         <canvas id="myCanvas_a" width="640" height="480" style="background-color: #ff0000; border:1px; position: absolute; left: 0; top: 0; z-index: 0;">
           Requires Google Chrome, Firefox, Safari, Opera, and internet explorere version 9 Beta
         </canvas>
         <canvas id="myCanvas" width="640" height="480" style="background-color: #0000ff; border:1px; position: absolute; left: 0; top: 0; z-index: 1;">Requires Google Chrome, Firefox, Safari, Opera, and internet explorere version 9 Beta
         </canvas>
+         
     </section>
+ 
 
     
-   
+
 
 
 
@@ -75,8 +82,8 @@
           
             window.addEventListener('load', function () {
 
-                folderNameSt = "Teapot";
-                imageNameSt = "teapot00";
+                folderNameSt = "Brain";
+                imageNameSt = "brain00";
                 folderNameSt_a = "Mask";
                 imageNameSt_a = "mask00";
                 fileTypeSt = ".jpg";
@@ -288,19 +295,32 @@
                     var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
                     var p_a = context_a.getImageData(x, y, 1, 1).data;
                     var hex_a = "#" + ("000000" + rgbToHex(p_a[0], p_a[1], p_a[2])).slice(-6);
-                    alert("(x =" + x + ", y = " + y + ")" + "\n\n HEX: " + hex +"\n r= " + p[0] + "\n g= " + p[1] + "\n b= " + p[2] +"\n alpha = " + p[3] +"\n\n MASK VALUES" +"\n r_a = " + p_a[0] +"\n g_a = " + p_a[1] +"\n b_a = " + p_a[2]);
+                   
+                   if(x<canvas.width/4){
+                    //alert("move left");
+                    imageNumber = (imageNumber-1)%TotalImages;
+                    }
+                   if(x>3*canvas.width/4){
+                    //alert("move right");
+                    imageNumber = (imageNumber+1)%TotalImages;
+                   }
+                   context.drawImage(GetImage(imageNumber, folderNameSt, imageNameSt, fileTypeSt), 0, 0);
+     context.fillText("Img:" + imageNumber, 0, 100);
+     
+     if(x>canvas.width/4 && x<3*canvas.width/4 )
+                  alert("(x =" + x + ", y = " + y + ")" + "\n\n HEX: " + hex +"\n r= " + p[0] + "\n g= " + p[1] + "\n b= " + p[2] +"\n alpha = " + p[3] +"\n\n MASK VALUES" +"\n r_a = " + p_a[0] +"\n g_a = " + p_a[1] +"\n b_a = " + p_a[2]);
                 });
               }, false);
        // }
        
        
-
+/*
 $(function(){
   var mouseX_down = 0, mouseY_down = 0;
   var mouseX_up = 0, mouseY_up = 0;
 var mouseX_move = 0, mouseY_move = 0;
   
-  $("#myCanvas").on( "vmousemove", vmousemoveHandler );
+ // $("#myCanvas").on( "vmousemove", vmousemoveHandler );
   $("#myCanvas").on( "vmouseup", vmouseupHandler );
    $("#myCanvas").on( "vmousedown", vmousedownHandler );
    
@@ -308,35 +328,22 @@ var mouseX_move = 0, mouseY_move = 0;
     mouseX_move = ev.pageX, mouseY_move = ev.pageY;
     
     if (turnTable.started) {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-     context.font = 'italic 15px sans-serif';
-     context.textBaseline = 'top';
-     context.fillText("X:" + ev.pageX, 0, 0);
-
+  
      //distance mouse moved (in Px)                    
      var changeDistance = Math.round((ev.pageX - startX));
      var rotation = (360 * changeDistance) / canvas.width;
      var pcnt_change = (100 * changeDistance) / canvas.width;
 
-    context.fillText("Delta:" + changeDistance, 0, 20);
-     context.fillText("Rotation:" + rotation, 0, 40);
-     context.fillText("% Change:" + pcnt_change, 0, 60);
-
      travelDistance = Math.round((TotalImages * pcnt_change) / 100);
      context.fillText("Image Delta:" + travelDistance, 0, 80);
 
-     //positionB = positionA + changeDistance;
      imageNumber = start_imageNumber + travelDistance;
 
      while (imageNumber > TotalImages - 1) {
-     // gone past end of array
-     // cycle ropund to begeining again
      imageNumber = imageNumber - TotalImages;
      }
 
      while (imageNumber < 0) {
-     // gone past begining of array
-     // cycle round from end again
      imageNumber = imageNumber + TotalImages;
      }
 
@@ -344,56 +351,43 @@ var mouseX_move = 0, mouseY_move = 0;
      context.fillText("Img:" + imageNumber, 0, 100);
      
    }
-//alert("VMOUSE MOVE \nX_diff = " + (mouseX_down - mouseX_up) + " Y_diff = " + (mouseY_down - mouseY_up) );
 
-   /*  if (turnTable_a.started) {
-     context_a.clearRect(0, 0, canvas_a.width, canvas_a.height);
-     context_a.font = 'italic 15px sans-serif';
-     context_a.textBaseline = 'top';
-     context_a.fillText("X:" + ev._x, 0, 0);
+    
+  }
 
-     //distance mouse moved (in Px)                    
-     var changeDistance = Math.round((ev._x - startX));
-     var rotation = (360 * changeDistance) / canvas_a.width;
-     var pcnt_change = (100 * changeDistance) / canvas_a.width;
-
-     context_a.fillText("Delta:" + changeDistance, 0, 20);
-     context_a.fillText("Rotation:" + rotation, 0, 40);
-     context_a.fillText("% Change:" + pcnt_change, 0, 60);
+function jump(){
+  
+  //distance mouse moved (in Px)                    
+     var changeDistance = Math.round((mouseX_up - startX));
+     var rotation = (360 * changeDistance) / canvas.width;
+     var pcnt_change = (100 * changeDistance) / canvas.width;
 
      travelDistance = Math.round((TotalImages * pcnt_change) / 100);
-     context_a.fillText("Image Delta:" + travelDistance, 0, 80);
-
-     //positionB = positionA + changeDistance;
+     
      imageNumber = start_imageNumber + travelDistance;
 
      while (imageNumber > TotalImages - 1) {
-     // gone past end of array
-     // cycle ropund to begeining again
      imageNumber = imageNumber - TotalImages;
      }
 
      while (imageNumber < 0) {
-     // gone past begining of array
-     // cycle round from end again
      imageNumber = imageNumber + TotalImages;
      }
 
-     context_a.drawImage(GetImage(imageNumber, folderNameSt_a, imageNameSt_a, fileTypeSt), 0, 0);
-     context_a.fillText("Img_a:" + imageNumber, 0, 100);
-     }*/
-    
-  }
+     context.drawImage(GetImage(imageNumber, folderNameSt, imageNameSt, fileTypeSt), 0, 0);
+     context.fillText("Img:" + imageNumber, 0, 100);
+}
   
   function vmouseupHandler( event ){
     mouseX_up = event.pageX;
     mouseY_up = event.pageY;
      
     if (turnTable.started) {
-     turnTable.vmousemove(event);
-     turnTable.started = false;
-     turnTable_a.vmousemove(event);
-     turnTable_a.started = false;
+     //turnTable.vmousemove(event);
+    // jump();
+     //turnTable.started = false;
+     //turnTable_a.vmousemove(event);
+     //turnTable_a.started = false;
     }
      
   }
@@ -410,12 +404,12 @@ var mouseX_move = 0, mouseY_move = 0;
     
      startX = (mouseX_down);
      start_imageNumber = imageNumber;
-    // alert("Virtual Mouse Down : startX = "+ startX + " mouseX_down = "+mouseX_down +" mouseY_down = " +mouseY_down);
+    alert("Virtual Mouse Down : startX = "+ startX + " mouseX_down = "+mouseX_down +" mouseY_down = " +mouseY_down);
    
     
   }  
   
-});
+});*/
 </script> 
 
 </body>
