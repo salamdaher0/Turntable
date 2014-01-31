@@ -220,14 +220,16 @@
        
  function next_Function (){
      imageNumber = (imageNumber+1)%TotalImages;
-     
+     document.getElementById('text').innerHTML= "imageNumber" + imageNumber;
      context_a.drawImage(GetImage(imageNumber, folderNameSt_a, imageNameSt_a, fileTypeSt), 0, 0);
      context.drawImage(GetImage(imageNumber, folderNameSt, imageNameSt, fileTypeSt), 0, 0);
     };
     
      function back_Function (){
-     imageNumber = (imageNumber-1)%TotalImages;
-    
+        
+     imageNumber = (360+imageNumber-1)%TotalImages;
+     
+     document.getElementById('text').innerHTML= "imageNumber" + imageNumber;
      context_a.drawImage(GetImage(imageNumber, folderNameSt_a, imageNameSt_a, fileTypeSt), 0, 0);
       context.drawImage(GetImage(imageNumber, folderNameSt, imageNameSt, fileTypeSt), 0, 0);
     }; 
