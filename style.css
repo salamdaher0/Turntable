@@ -9,7 +9,7 @@ body {
      left: 0px;
    width: 100px;
     height: 480px;
-    background-color: #ffff00;
+    background-color: #ffffff;
     position: absolute;
 }
 
@@ -48,7 +48,7 @@ body {
     right: 0px;
     width: 100px;
     height: 480px;
-    background-color: #ff0000;
+    background-color: #ffffff;
     position: absolute;
    /* display: block;*/
 }
@@ -57,9 +57,33 @@ body {
     left: 0px;
     top: 480px;
    
-    width: 840px;
-    height: 200px;
-    background-color: #00ff00;
+    width: 600px;
+    height: 100px;
+    
+    margin-left: 100px;
+    padding: 20px;
+    background-color: #aaaaaa;
     position: absolute;
     
 }
+
+#btn_next{
+    width: 100px;
+    height: 100px;
+    margin-top: 140px;
+    background-color: #ffffff;
+    background-image: url(icons/next.png);
+    background-repeat:no-repeat;
+    background-position:center;
+    
+ }
+ #btn_back{
+     width: 100px;
+    height: 100px;
+     margin-top: 140px;
+    background-color: #ffffff;
+    background-image: url(icons/prev.png);
+    background-repeat:no-repeat;
+    background-position:center; 
+ }   
+	

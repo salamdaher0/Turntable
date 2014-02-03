@@ -6,6 +6,15 @@
                 var travelDistance = 0;
                 var startX = 0;
                 var positionA = 0;
+                
+                 var FONTAL_LOBE = 230;
+               var PARIETAL_LOBE = 0;
+               var OCCIPITAL_LOBE = 64;
+               var TEMPORAL_LOBE = 64;
+               var LATERAL_FISSURE = 0;
+               var CENTRAL_FISSURE = 0;
+               var LONGITUDINAL_FISSURE= 0;
+                
        // if (window.addEventListener) {
           
             window.addEventListener('load', function () {
@@ -214,6 +223,16 @@
                         "\n r_a = " + p_a[0] +
                         "\n g_a = " + p_a[1] +
                         "\n b_a = " + p_a[2]);*/
+               
+               if (p_a[0] == FONTAL_LOBE){ document.getElementById('text').innerHTML="Frontal Lobe";}
+               if (p_a[0] == PARIETAL_LOBE){ document.getElementById('text').innerHTML="Parietal Lobe";}
+               if (p_a[0] == OCCIPITAL_LOBE){ document.getElementById('text').innerHTML="Occipital Lobe";}
+               if (p_a[0] == TEMPORAL_LOBE){ document.getElementById('text').innerHTML="Temporal Lobe";}
+               if (p_a[0] == LATERAL_FISSURE){ document.getElementById('text').innerHTML="Lateral Fissure";}
+               if (p_a[0] == CENTRAL_FISSURE){ document.getElementById('text').innerHTML="Central Fissure";}
+               if (p_a[0] == LONGITUDINAL_FISSURE){ document.getElementById('text').innerHTML="Longitudinal Fissure";}
+               
+               
                 });
               }, false);
        // }
