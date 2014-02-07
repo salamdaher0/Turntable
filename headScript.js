@@ -1,10 +1,19 @@
 
 folderNameSt = "Brain";
-        imageNameSt = "Brain00";
-        folderNameSt_a = "Mask";
-        imageNameSt_a = "Mask00";
+       /*  folderNameSt = "Brain";
+                imageNameSt = "brain00";
+                folderNameSt_a = "Mask";
+               imageNameSt_a = "mask00";
+              */
+              
+                folderNameSt = "BrainInside";
+                imageNameSt = "brainInside00";
+                folderNameSt_a = "Mask";
+                imageNameSt_a = "brainInsideMask00";
+                fileTypeSt = ".jpg";
+                fileTypeSt_a = ".png";
         TotalImages = 36;
-        fileTypeSt = ".jpg";
+       
         
         var digit = "";
         function GetImage(PictureNumber, folderName, imageName, fileType) {

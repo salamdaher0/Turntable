@@ -7,24 +7,38 @@
                 var startX = 0;
                 var positionA = 0;
                 
-                 var FONTAL_LOBE = 230;
-               var PARIETAL_LOBE = 0;
-               var OCCIPITAL_LOBE = 64;
+               var FONTAL_LOBE = 230;
+               var PARIETAL_LOBE = 191;
+               var OCCIPITAL_LOBE = 26;
                var TEMPORAL_LOBE = 64;
-               var LATERAL_FISSURE = 0;
-               var CENTRAL_FISSURE = 0;
-               var LONGITUDINAL_FISSURE= 0;
+               var CEREBELLUM = 128;
+               var LONGITUDINAL_FISSURE= 13;
+               var CEREBRAL_CORETX = 166;
+               var THALAMUS = 204;
+               var HYPOTHALAMUS = 217;
+               var OTHER = 243;
+               
+              
+              
+          
                 
        // if (window.addEventListener) {
           
             window.addEventListener('load', function () {
 
                 
-                folderNameSt = "Brain";
+              /*  folderNameSt = "Brain";
                 imageNameSt = "brain00";
                 folderNameSt_a = "Mask";
-                imageNameSt_a = "mask00";
+               imageNameSt_a = "mask00";
+              */
+              
+                folderNameSt = "BrainInside";
+                imageNameSt = "brainInside00";
+                folderNameSt_a = "Mask";
+                imageNameSt_a = "brainInsideMask00";
                 fileTypeSt = ".jpg";
+                fileTypeSt_a = ".png";
                TotalImages = 36;
                
                 function init() {
@@ -112,7 +126,7 @@
                                 imageNumber = imageNumber + TotalImages;
                             }
 
-                            context_a.drawImage(GetImage(imageNumber, folderNameSt_a, imageNameSt_a, fileTypeSt), 0, 0);
+                            context_a.drawImage(GetImage(imageNumber, folderNameSt_a, imageNameSt_a, fileTypeSt_a), 0, 0);
                         }
                     };
 
@@ -199,11 +213,11 @@
                    
                    
                    context.drawImage(GetImage(imageNumber, folderNameSt, imageNameSt, fileTypeSt), 0, 0);
-                   context_a.drawImage(GetImage(imageNumber, folderNameSt_a, imageNameSt_a, fileTypeSt), 0, 0);
+                   context_a.drawImage(GetImage(imageNumber, folderNameSt_a, imageNameSt_a, fileTypeSt_a), 0, 0);
   //   context.fillText("Img:" + imageNumber, 0, 100);
      
     // if(x>canvas.width/4 && x<3*canvas.width/4 )
-    document.getElementById('text').innerHTML= "(x =" + x + ", y = " + y + ")" +
+   /* document.getElementById('text').innerHTML= "(x =" + x + ", y = " + y + ")" +
                         "<BR> HEX: " + hex +
                         "<BR> r= " + p[0] +
                         "\n g= " + p[1] +
@@ -213,7 +227,8 @@
                         "<BR> r_a = " + p_a[0] +
                         "\n g_a = " + p_a[1] +
                         "\n b_a = " + p_a[2] ;
-    
+    */
+   
                /*  alert("(x =" + x + ", y = " + y + ")" + "\n\n HEX: " + hex +
                         "\n r= " + p[0] +
                         "\n g= " + p[1] +
@@ -224,13 +239,29 @@
                         "\n g_a = " + p_a[1] +
                         "\n b_a = " + p_a[2]);*/
                
-               if (p_a[0] == FONTAL_LOBE){ document.getElementById('text').innerHTML="Frontal Lobe";}
-               if (p_a[0] == PARIETAL_LOBE){ document.getElementById('text').innerHTML="Parietal Lobe";}
-               if (p_a[0] == OCCIPITAL_LOBE){ document.getElementById('text').innerHTML="Occipital Lobe";}
-               if (p_a[0] == TEMPORAL_LOBE){ document.getElementById('text').innerHTML="Temporal Lobe";}
-               if (p_a[0] == LATERAL_FISSURE){ document.getElementById('text').innerHTML="Lateral Fissure";}
-               if (p_a[0] == CENTRAL_FISSURE){ document.getElementById('text').innerHTML="Central Fissure";}
-               if (p_a[0] == LONGITUDINAL_FISSURE){ document.getElementById('text').innerHTML="Longitudinal Fissure";}
+               /*var FONTAL_LOBE = 230;
+               var PARIETAL_LOBE = 191;
+               var OCCIPITAL_LOBE = 26;
+               var TEMPORAL_LOBE = 64;
+               var CEREBELLUM = 128;
+               var LONGITUDINAL_FISSURE= 13;
+               var CEREBRAL_CORETX = 166;
+               var THALAMUS = 204;
+               var HYPOTHALAMUS = 217;
+               var OTHER = 229;
+               */
+               
+               if (p_a[0] == 0){ document.getElementById('text').innerHTML="Click on the Right and Left arrows to rotate the brain. Click on the brain to identify part.";}
+              if (p_a[0] == OTHER) { document.getElementById('text').innerHTML="<b>Corpus Callosum</b>";}
+              if (p_a[0] == FONTAL_LOBE){ document.getElementById('text').innerHTML="<b>Frontal Lobe:</b><br/> Frontal part of the cerebral cortex, centrally involved in higher thought processes.";}
+               if (p_a[0] == PARIETAL_LOBE){ document.getElementById('text').innerHTML="<b>Parietal Lobe:</b><br/> Cerebral lobes located just above the temporal lobes, between the frontal and occipital lobes. The parietal lobes are involved in sensation.";}
+               if (p_a[0] == OCCIPITAL_LOBE){ document.getElementById('text').innerHTML="<b>Occipital Lobe:</b><br/> Part of the cerebral cortex located at the rear of the brain, involved in vision.";}
+               if (p_a[0] == TEMPORAL_LOBE){ document.getElementById('text').innerHTML="<b>Temporal Lobe:</b><br/> Cerebral structure located on either side of the cerebrum, associated primarily with speech, language, and hearing.";}
+               if (p_a[0] == CEREBELLUM){ document.getElementById('text').innerHTML="<b>Cerebellum:</b><br/> A major brain structure attached to the rear of the brain stem, whose principal functions appear to be coordinating motor activity and maintaining balance.";}
+               if (p_a[0] == LONGITUDINAL_FISSURE){ document.getElementById('text').innerHTML="<b>Longitudinal Fissure</b>";}
+               if (p_a[0] == CEREBRAL_CORETX){ document.getElementById('text').innerHTML="<b>Cerebral Cortex:</b><br/> The convoluted outer covering of the cerebrum, the main functions of which have to do with higher mental processes like thinking and imagining.";}
+               if (p_a[0] == THALAMUS){ document.getElementById('text').innerHTML="<b>Thalamus:</b><br/> A small brain structure that serves as a major relay center for incoming sensory signals.";}
+               if (p_a[0] == HYPOTHALAMUS){ document.getElementById('text').innerHTML="<b>Hypothalamus:</b><br/> A small structure at the base of the brain involved in the functioning of the autonomic nervous system and in temperature regulation.";}
                
                
                 });
@@ -239,8 +270,8 @@
        
  function next_Function (){
      imageNumber = (imageNumber+1)%TotalImages;
-     document.getElementById('text').innerHTML= "imageNumber" + imageNumber;
-     context_a.drawImage(GetImage(imageNumber, folderNameSt_a, imageNameSt_a, fileTypeSt), 0, 0);
+     document.getElementById('text').innerHTML= "Click on the Right and Left arrows to rotate the brain. Click on the brain to identify part.";//"imageNumber" + imageNumber;
+     context_a.drawImage(GetImage(imageNumber, folderNameSt_a, imageNameSt_a, fileTypeSt_a), 0, 0);
      context.drawImage(GetImage(imageNumber, folderNameSt, imageNameSt, fileTypeSt), 0, 0);
     };
     
@@ -248,7 +279,7 @@
         
      imageNumber = (360+imageNumber-1)%TotalImages;
      
-     document.getElementById('text').innerHTML= "imageNumber" + imageNumber;
-     context_a.drawImage(GetImage(imageNumber, folderNameSt_a, imageNameSt_a, fileTypeSt), 0, 0);
+     document.getElementById('text').innerHTML= "Click on the Right and Left arrows to rotate the brain. Click on the brain to identify part.";//"imageNumber" + imageNumber;
+     context_a.drawImage(GetImage(imageNumber, folderNameSt_a, imageNameSt_a, fileTypeSt_a), 0, 0);
       context.drawImage(GetImage(imageNumber, folderNameSt, imageNameSt, fileTypeSt), 0, 0);
     }; 

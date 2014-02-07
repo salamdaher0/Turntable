@@ -5,22 +5,34 @@ body {
     
  
 #left{
-     top: 0px;
-     left: 0px;
-   width: 100px;
+    top: 105px;
+    left: 0px;
+    width: 192px;
     height: 480px;
-    background-color: #ffffff;
+    background-color: #e0e0e0;
     position: absolute;
 }
 
 #middle{
     width: auto;
-    height: auto
-    background-color: #ff00ff;
+    height: auto;
+    background-color: #e0e0e0;
     position: absolute;
 
 }
-
+#top{
+    width: 1024px;
+    height: 105px;
+    background-color: #e0e0e0;
+    position: absolute;
+left: 0px;
+    top: 0px;
+    
+     background-image: url(icons/signify_topBanner_Title.png);
+    background-repeat:no-repeat;
+    background-position:center;
+    
+}
 
 
 
@@ -29,61 +41,71 @@ body {
     background-color: #ffffff;
  /*   border:0px;*/
     position: absolute;
-    left: 100px;
-    top: 0;
+    left: 192px;
+    top: 105px;
     z-index: 0;
+   /* box-sizing: border-box;*/
 }
 
 #myCanvas{
     background-color: #ffffff;
   /*  border:0px;*/
     position: absolute;
-    left: 100px;
-    top: 0;
+    left: 192px;
+    top: 105px;
     z-index: 1;
 }
 #right{
-   left: 740px;
-    top: 0px;
+   left: 832px;
+    top: 105px;
     right: 0px;
-    width: 100px;
+    width: 192px;
     height: 480px;
-    background-color: #ffffff;
+    background-color: #e0e0e0;
     position: absolute;
    /* display: block;*/
 }
 
 #bottom{
     left: 0px;
-    top: 480px;
+    top: 584px;
    
-    width: 600px;
-    height: 100px;
+    width: 624px;
+    height: 168px;
     
-    margin-left: 100px;
-    padding: 20px;
-    background-color: #aaaaaa;
+    margin-left: 0px;
+    padding: 20px 200px 20px 200px;
+    background-color: #e0e0e0;
     position: absolute;
+    background-image: url(icons/signify_textArea.png);
+    background-repeat:no-repeat;
+    background-position:center;
+    
+    font-family:"Calibri",Verdana, Geneva, sans-serif;
+    font-size: larger;
     
 }
 
 #btn_next{
     width: 100px;
     height: 100px;
-    margin-top: 140px;
-    background-color: #ffffff;
+    margin: 140px 41px 140px 41px;
+    background-color: #e0e0e0;
     background-image: url(icons/next.png);
     background-repeat:no-repeat;
     background-position:center;
+    border: none;
+    
     
  }
  #btn_back{
      width: 100px;
     height: 100px;
-     margin-top: 140px;
-    background-color: #ffffff;
+    margin: 140px 41px 140px 41px;
+    background-color: #e0e0e0;
     background-image: url(icons/prev.png);
     background-repeat:no-repeat;
-    background-position:center; 
+    background-position:center;
+    border: none;
  }   
 	
