@@ -20,7 +20,7 @@
                
               
               
-          
+           
                 
        // if (window.addEventListener) {
           
@@ -52,6 +52,7 @@
                     canvas.addEventListener('mousedown', evnt_canvas, false);
                     canvas.addEventListener('mousemove', evnt_canvas, false);
                     canvas.addEventListener('mouseup', evnt_canvas, false);
+                    context.drawImage(GetImage(imageNumber, folderNameSt, imageNameSt, fileTypeSt), 0, 0);
                 }
 
                 function init_a() {
@@ -65,6 +66,7 @@
                     canvas_a.addEventListener('mousedown', evnt_canvas_a, false);
                     canvas_a.addEventListener('mousemove', evnt_canvas_a, false);
                     canvas_a.addEventListener('mouseup', evnt_canvas_a, false);
+                    context_a.drawImage(GetImage(imageNumber, folderNameSt_a, imageNameSt_a, fileTypeSt_a), 0, 0);
                 }
 
                 function turnTable_app_a() {
@@ -214,6 +216,19 @@
                    
                    context.drawImage(GetImage(imageNumber, folderNameSt, imageNameSt, fileTypeSt), 0, 0);
                    context_a.drawImage(GetImage(imageNumber, folderNameSt_a, imageNameSt_a, fileTypeSt_a), 0, 0);
+                   
+                   // Fill Style
+                   context.fillStyle = "rgba(200,200,0,0.30)";
+                   context.beginPath();
+//Canvas shape
+context.arc(x,y,20,0,Math.PI*2,true);
+// Close path
+context.closePath();
+// Fill shape
+context.fill();
+
+
+                   
   //   context.fillText("Img:" + imageNumber, 0, 100);
      
     // if(x>canvas.width/4 && x<3*canvas.width/4 )
