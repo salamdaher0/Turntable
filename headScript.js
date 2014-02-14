@@ -8,11 +8,17 @@ folderNameSt = "Brain";
               
                 folderNameSt = "BrainInside";
                 imageNameSt = "brainInside00";
+                fileTypeSt = ".jpg";
+        
                 folderNameSt_a = "Mask";
                 imageNameSt_a = "brainInsideMask00";
-                fileTypeSt = ".jpg";
                 fileTypeSt_a = ".png";
-        TotalImages = 36;
+        
+                folderNameSt_s = "Select";
+              //  imageNameSt_s03 = "select_03_00";
+                fileTypeSt_s = ".png";
+        
+                TotalImages = 36;
        
         
         var digit = "";

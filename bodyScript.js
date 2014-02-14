@@ -17,10 +17,70 @@
                var THALAMUS = 204;
                var HYPOTHALAMUS = 217;
                var OTHER = 243;
+             
+               var area_00={name:"FONTAL_LOBE",
+                        color:230,
+                        filename:"select_00_00",
+                        content:"<b>Frontal Lobe:</b><br/> Frontal part of the cerebral cortex, centrally involved in higher thought processes."}; 
                
-              
-              
-           
+               var area_01={name:"PARIETAL LOBE",
+                        color:191,
+                        filename:"select_01_00",
+                        content:"<b>Parietal Lobe:</b><br/> Cerebral lobes located just above the temporal lobes, between the frontal and occipital lobes. The parietal lobes are involved in sensation."};
+                        
+              var area_02={name:"OCCIPITAL LOBE",
+                        color:26,
+                        filename:"select_02_00",
+                        content:"<b>Occipital Lobe:</b><br/> Part of the cerebral cortex located at the rear of the brain, involved in vision."};
+             
+             var area_03={name:"TEMPORAL LOBE",
+                        color:64,
+                        filename:"select_03_00",
+                        content:"<b>Temporal Lobe:</b><br/> Cerebral structure located on either side of the cerebrum, associated primarily with speech, language, and hearing."};
+            
+            var area_04={name:"CEREBELLUM",
+                        color:128,
+                        filename:"select_04_00",
+                        content:"<b>Cerebellum:</b><br/> A major brain structure attached to the rear of the brain stem, whose principal functions appear to be coordinating motor activity and maintaining balance."};
+                        
+            var area_05={name:"LONGITUDINAL_FISSURE",
+                        color:13,
+                        filename:"select_05_00",
+                        content:""};
+                        
+            var area_06={name:"CEREBRAL_CORETX",
+                        color: 166,
+                        filename:"select_06_00",
+                        content:"<b>Cerebral Cortex:</b><br/> The convoluted outer covering of the cerebrum, the main functions of which have to do with higher mental processes like thinking and imagining."};
+                        
+            var area_07={name:"THALAMUS",
+                        color:204,
+                        filename:"select_07_00",
+                        content: "<b>Thalamus:</b><br/> A small brain structure that serves as a major relay center for incoming sensory signals."};
+                        
+             var area_08={name:"HYPOTHALAMUS",
+                        color:217,
+                        filename:"select_08_00",
+                        content:"<b>Hypothalamus:</b><br/> A small structure at the base of the brain involved in the functioning of the autonomic nervous system and in temperature regulation."};
+                        
+             var area_09={name:"OTHER",
+                        color:245,
+                        filename:"select_09_00",
+                        content:"<b>Corpus Callosum</b>"};
+                        
+          var brain = new Array();
+          brain[0] = area_00;
+          brain[1] = area_01;
+          brain[2] = area_02;
+          brain[3] = area_03;
+          brain[4] = area_04;
+          brain[5] = area_05;
+          brain[6] = area_06;
+          brain[7] = area_07;
+          brain[8] = area_08;
+          brain[9] = area_09;
+          
+          
                 
        // if (window.addEventListener) {
           
@@ -35,10 +95,17 @@
               
                 folderNameSt = "BrainInside";
                 imageNameSt = "brainInside00";
+                fileTypeSt = ".jpg";
+               
                 folderNameSt_a = "Mask";
                 imageNameSt_a = "brainInsideMask00";
-                fileTypeSt = ".jpg";
-                fileTypeSt_a = ".png";
+                 fileTypeSt_a = ".png";
+               
+                folderNameSt_s = "Select";
+               // imageNameSt_s = "select_03_00";
+                fileTypeSt_s = ".png";
+                
+                
                TotalImages = 36;
                
                 function init() {
@@ -211,12 +278,14 @@
                     var p = context.getImageData(x, y, 1, 1).data;
                     var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
                     var p_a = context_a.getImageData(x, y, 1, 1).data;
+                    
+                    //var p_select = context_a.getImageData(x, y, 640, 480).data;
+                    
                     var hex_a = "#" + ("000000" + rgbToHex(p_a[0], p_a[1], p_a[2])).slice(-6);
-                   
                    
                    context.drawImage(GetImage(imageNumber, folderNameSt, imageNameSt, fileTypeSt), 0, 0);
                    context_a.drawImage(GetImage(imageNumber, folderNameSt_a, imageNameSt_a, fileTypeSt_a), 0, 0);
-                   
+                  /* 
                    // Fill Style
                    context.fillStyle = "rgba(200,200,0,0.30)";
                    context.beginPath();
@@ -226,59 +295,20 @@ context.arc(x,y,20,0,Math.PI*2,true);
 context.closePath();
 // Fill shape
 context.fill();
-
+*/
 
                    
-  //   context.fillText("Img:" + imageNumber, 0, 100);
-     
-    // if(x>canvas.width/4 && x<3*canvas.width/4 )
-   /* document.getElementById('text').innerHTML= "(x =" + x + ", y = " + y + ")" +
-                        "<BR> HEX: " + hex +
-                        "<BR> r= " + p[0] +
-                        "\n g= " + p[1] +
-                        "\n b= " + p[2] +
-                        "\n alpha = " + p[3] +
-                        "<BR> MASK VALUES" +
-                        "<BR> r_a = " + p_a[0] +
-                        "\n g_a = " + p_a[1] +
-                        "\n b_a = " + p_a[2] ;
-    */
-   
-               /*  alert("(x =" + x + ", y = " + y + ")" + "\n\n HEX: " + hex +
-                        "\n r= " + p[0] +
-                        "\n g= " + p[1] +
-                        "\n b= " + p[2] +
-                        "\n alpha = " + p[3] +
-                        "\n\n MASK VALUES" +
-                        "\n r_a = " + p_a[0] +
-                        "\n g_a = " + p_a[1] +
-                        "\n b_a = " + p_a[2]);*/
-               
-               /*var FONTAL_LOBE = 230;
-               var PARIETAL_LOBE = 191;
-               var OCCIPITAL_LOBE = 26;
-               var TEMPORAL_LOBE = 64;
-               var CEREBELLUM = 128;
-               var LONGITUDINAL_FISSURE= 13;
-               var CEREBRAL_CORETX = 166;
-               var THALAMUS = 204;
-               var HYPOTHALAMUS = 217;
-               var OTHER = 229;
-               */
-               
-               if (p_a[0] == 0){ document.getElementById('text').innerHTML="Click on the Right and Left arrows to rotate the brain. Click on the brain to identify part.";}
-              if (p_a[0] == OTHER) { document.getElementById('text').innerHTML="<b>Corpus Callosum</b>";}
-              if (p_a[0] == FONTAL_LOBE){ document.getElementById('text').innerHTML="<b>Frontal Lobe:</b><br/> Frontal part of the cerebral cortex, centrally involved in higher thought processes.";}
-               if (p_a[0] == PARIETAL_LOBE){ document.getElementById('text').innerHTML="<b>Parietal Lobe:</b><br/> Cerebral lobes located just above the temporal lobes, between the frontal and occipital lobes. The parietal lobes are involved in sensation.";}
-               if (p_a[0] == OCCIPITAL_LOBE){ document.getElementById('text').innerHTML="<b>Occipital Lobe:</b><br/> Part of the cerebral cortex located at the rear of the brain, involved in vision.";}
-               if (p_a[0] == TEMPORAL_LOBE){ document.getElementById('text').innerHTML="<b>Temporal Lobe:</b><br/> Cerebral structure located on either side of the cerebrum, associated primarily with speech, language, and hearing.";}
-               if (p_a[0] == CEREBELLUM){ document.getElementById('text').innerHTML="<b>Cerebellum:</b><br/> A major brain structure attached to the rear of the brain stem, whose principal functions appear to be coordinating motor activity and maintaining balance.";}
-               if (p_a[0] == LONGITUDINAL_FISSURE){ document.getElementById('text').innerHTML="<b>Longitudinal Fissure</b>";}
-               if (p_a[0] == CEREBRAL_CORETX){ document.getElementById('text').innerHTML="<b>Cerebral Cortex:</b><br/> The convoluted outer covering of the cerebrum, the main functions of which have to do with higher mental processes like thinking and imagining.";}
-               if (p_a[0] == THALAMUS){ document.getElementById('text').innerHTML="<b>Thalamus:</b><br/> A small brain structure that serves as a major relay center for incoming sensory signals.";}
-               if (p_a[0] == HYPOTHALAMUS){ document.getElementById('text').innerHTML="<b>Hypothalamus:</b><br/> A small structure at the base of the brain involved in the functioning of the autonomic nervous system and in temperature regulation.";}
-               
-               
+ 
+          // select Salam     
+               for (var i=0;i<brain.length;i++){
+                if(p_a[0] == brain[i].color)
+               { document.getElementById('text').innerHTML= brain[i].content;
+                
+               // if (i== 3)
+                context.drawImage(GetImage(imageNumber, folderNameSt_s, brain[i].filename, fileTypeSt_s), 0, 0);
+               }
+               }
+           
                 });
               }, false);
        // }
