@@ -64,7 +64,7 @@
                         content:"<b>Hypothalamus:</b><br/> A small structure at the base of the brain involved in the functioning of the autonomic nervous system and in temperature regulation."};
                         
              var area_09={name:"OTHER",
-                        color:245,
+                        color:243,
                         filename:"select_09_00",
                         content:"<b>Corpus Callosum</b>"};
                         
@@ -86,12 +86,6 @@
           
             window.addEventListener('load', function () {
 
-                
-              /*  folderNameSt = "Brain";
-                imageNameSt = "brain00";
-                folderNameSt_a = "Mask";
-               imageNameSt_a = "mask00";
-              */
               
                 folderNameSt = "BrainInside";
                 imageNameSt = "brainInside00";
@@ -102,7 +96,6 @@
                  fileTypeSt_a = ".png";
                
                 folderNameSt_s = "Select";
-               // imageNameSt_s = "select_03_00";
                 fileTypeSt_s = ".png";
                 
                 
@@ -268,6 +261,7 @@
 
                 init_a();
                 init();
+              
                 canvas.addEventListener('click', function (e) {
 
                     var position = findPos(this);
@@ -289,23 +283,19 @@
                    // Fill Style
                    context.fillStyle = "rgba(200,200,0,0.30)";
                    context.beginPath();
-//Canvas shape
-context.arc(x,y,20,0,Math.PI*2,true);
-// Close path
-context.closePath();
-// Fill shape
-context.fill();
-*/
+                    //Canvas shape
+                    context.arc(x,y,20,0,Math.PI*2,true);
+                    // Close path
+                    context.closePath();
+                    // Fill shape
+                    context.fill();
+                    */
 
-                   
- 
-          // select Salam     
+          // Draw Selection image    
                for (var i=0;i<brain.length;i++){
                 if(p_a[0] == brain[i].color)
                { document.getElementById('text').innerHTML= brain[i].content;
-                
-               // if (i== 3)
-                context.drawImage(GetImage(imageNumber, folderNameSt_s, brain[i].filename, fileTypeSt_s), 0, 0);
+                 context.drawImage(GetImage(imageNumber, folderNameSt_s, brain[i].filename, fileTypeSt_s), 0, 0);
                }
                }
            
@@ -315,7 +305,7 @@ context.fill();
        
  function next_Function (){
      imageNumber = (imageNumber+1)%TotalImages;
-     document.getElementById('text').innerHTML= "Click on the Right and Left arrows to rotate the brain. Click on the brain to identify part.";//"imageNumber" + imageNumber;
+     document.getElementById('text').innerHTML= "Click on the Right and Left arrows to rotate the brain. Double click on the brain to identify part.";
      context_a.drawImage(GetImage(imageNumber, folderNameSt_a, imageNameSt_a, fileTypeSt_a), 0, 0);
      context.drawImage(GetImage(imageNumber, folderNameSt, imageNameSt, fileTypeSt), 0, 0);
     };
@@ -324,7 +314,7 @@ context.fill();
         
      imageNumber = (360+imageNumber-1)%TotalImages;
      
-     document.getElementById('text').innerHTML= "Click on the Right and Left arrows to rotate the brain. Click on the brain to identify part.";//"imageNumber" + imageNumber;
+     document.getElementById('text').innerHTML= "Click on the Right and Left arrows to rotate the brain. Click on the brain to identify part.";
      context_a.drawImage(GetImage(imageNumber, folderNameSt_a, imageNameSt_a, fileTypeSt_a), 0, 0);
       context.drawImage(GetImage(imageNumber, folderNameSt, imageNameSt, fileTypeSt), 0, 0);
     }; 

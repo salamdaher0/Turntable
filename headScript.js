@@ -1,10 +1,6 @@
 
 folderNameSt = "Brain";
-       /*  folderNameSt = "Brain";
-                imageNameSt = "brain00";
-                folderNameSt_a = "Mask";
-               imageNameSt_a = "mask00";
-              */
+ 
               
                 folderNameSt = "BrainInside";
                 imageNameSt = "brainInside00";
