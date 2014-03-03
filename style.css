@@ -55,6 +55,15 @@ left: 0px;
     top: 105px;
     z-index: 1;
 }
+
+#myCanvas_s{
+   opacity:0.5;
+  /*  border:0px;*/
+    position: absolute;
+    left: 192px;
+    top: 105px;
+    z-index: 2;
+}
 #right{
    left: 832px;
     top: 105px;
