@@ -1,7 +1,13 @@
+/*
+ (C) 2013 Salam Daher, METIL Lab , University of Central Florida.
 
-folderNameSt = "Brain";
- 
-              
+ Credit for the following functions:
+ GetImage is written by (C) 2010 Stephen Bates [pharion3d@gmail.com]. All rights reserved.
+Obtain permission before selling/redistributing in any medium.
+
+Was found on  http://www.3dbuzz.com/forum/threads/186299-free-HTML5-Canvas-Turntable-to-show-off-your-3d-work
+
+*/
                 folderNameSt = "BrainInside";
                 imageNameSt = "brainInside00";
                 fileTypeSt = ".jpg";

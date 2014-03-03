@@ -1,3 +1,14 @@
+/*
+ (C) 2013 Salam Daher, METIL Lab , University of Central Florida.
+
+ Credit for the following functions:
+ init() , evnt_canvas (ev) and turnTable_app()  are written by (C) 2010 Stephen Bates [pharion3d@gmail.com]. All rights reserved.
+Obtain permission before selling/redistributing in any medium.
+
+those functions were found on  http://www.3dbuzz.com/forum/threads/186299-free-HTML5-Canvas-Turntable-to-show-off-your-3d-work
+
+*/
+
 var canvas, canvas_a;
 var context, context_a;
 var turnTable, turntable_a;
@@ -90,25 +101,9 @@ brain[7] = area_07;
 brain[8] = area_08;
 brain[9] = area_09;
 
-/*
-folderNameSt = "BrainInside";
-imageNameSt = "brainInside00";
-fileTypeSt = ".jpg";
-
-folderNameSt_a = "Mask";
-imageNameSt_a = "brainInsideMask00";
-fileTypeSt_a = ".png";
-
-folderNameSt_s = "Select";
-fileTypeSt_s = ".png";
-
-TotalImages = 36;
-*/
 window.addEventListener('load',main_Function(), false);
+
 function main_Function() {
-
-
-
 
 function init() {
 canvas = document.getElementById('myCanvas');
@@ -215,36 +210,35 @@ this.mouseup = function (ev) {
 
 
 function evnt_canvas(ev) {
-if (ev.layerX || ev.layerX == 0) { // Firefox
-    ev._x = ev.layerX;
-    ev._y = ev.layerY;
-} else if (ev.offsetX || ev.offsetX == 0) { // Opera
-    ev._x = ev.offsetX;
-    ev._y = ev.offsetY;
-}
-
-
-var func = turnTable[ev.type];
-if (func) {
-    func(ev);
-}
+    if (ev.layerX || ev.layerX == 0) { // Firefox
+        ev._x = ev.layerX;
+        ev._y = ev.layerY;
+    } else if (ev.offsetX || ev.offsetX == 0) { // Opera
+        ev._x = ev.offsetX;
+        ev._y = ev.offsetY;
+    }
+    
+    var func = turnTable[ev.type];
+    if (func) {
+        func(ev);
+    }
 }
 
 function evnt_canvas_a(ev) {
-if (ev.layerX || ev.layerX == 0) { // Firefox
-    ev._x = ev.layerX;
-    ev._y = ev.layerY;
-} else if (ev.offsetX || ev.offsetX == 0) { // Opera
-    ev._x = ev.offsetX;
-    ev._y = ev.offsetY;
+    if (ev.layerX || ev.layerX == 0) { // Firefox
+        ev._x = ev.layerX;
+        ev._y = ev.layerY;
+    } else if (ev.offsetX || ev.offsetX == 0) { // Opera
+        ev._x = ev.offsetX;
+        ev._y = ev.offsetY;
+    }
+    
+    var func_a = turnTable_a[ev.type];
+    if (func_a) {
+        func_a(ev);
+    }
 }
 
-
-var func_a = turnTable_a[ev.type];
-if (func_a) {
-    func_a(ev);
-}
-}
 
 function findPos(obj) {
 var current_left = 0,
@@ -344,14 +338,13 @@ function(){
     for (var i=0;i<brain.length;i++){
         GetImage(imageNumber, folderNameSt_s, brain[i].filename, fileTypeSt_s);
         }
-      
-    context.drawImage(GetImage(imageNumber, folderNameSt, imageNameSt, fileTypeSt), 0, 0);
+
+ 
 $('#myCanvas').trigger('click' , function(e){
  
 mainFunction();
 clickAreaFunction();
-  next_Function ();
-        back_Function ();
+  
 });
 }
 );
